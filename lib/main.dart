@@ -1018,7 +1018,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     
     final appState = context.watch<MyAppState>();
-    final endPoint = _findDistinctEnd(appState.route);
+    //final endPoint = _findDistinctEnd(appState.route);
 
     // FlutterMap branch (Web/Desktop)
     final flutterMap = flutter_map.FlutterMap(
