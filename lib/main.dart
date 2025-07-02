@@ -116,19 +116,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   }
 }
 
-//final _geo = latlong2.Distance();
 
-
-// latlong2.LatLng _findDistinctEnd(List<latlong2.LatLng> pts,
-//     {double minMeters = 5}) {
-//   if (pts.length < 2) return pts.first;
-//   final start = pts.first;
-//   // iterate from the tail until we find one > minMeters from start
-//   for (final p in pts.reversed) {
-//     if (_geo(start, p) > minMeters) return p;
-//   }
-//   return start;   // fall-back: everything identical
-// }
 
 class RoutePoint {
   final latlong2.LatLng pos;
@@ -323,14 +311,11 @@ class MyAppState extends ChangeNotifier {
       longitude = pos.longitude;
       gpsSpeed = pos.speed * 3.6;
       _appendPoint(latlong2.LatLng(latitude, longitude));
-      //route.add(latlong2.LatLng(latitude, longitude));
       notifyListeners();
     });
   }
 
   void refreshFakeData() {
-   // final now = DateTime.now();
-    //final seconds = now.second + now.millisecond / 1000.0;
     final t = DateTime.now().second + DateTime.now().millisecond / 1000;
 
     battery = 12.5 + (Random().nextDouble() - 0.5) * 0.3;
@@ -1018,9 +1003,6 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     
     final appState = context.watch<MyAppState>();
-    //final endPoint = _findDistinctEnd(appState.route);
-
-    // FlutterMap branch (Web/Desktop)
     final flutterMap = flutter_map.FlutterMap(
       mapController: _fmController,
       options: flutter_map.MapOptions(
