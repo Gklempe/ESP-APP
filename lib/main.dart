@@ -116,19 +116,19 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   }
 }
 
-final _geo = latlong2.Distance();
+//final _geo = latlong2.Distance();
 
 
-latlong2.LatLng _findDistinctEnd(List<latlong2.LatLng> pts,
-    {double minMeters = 5}) {
-  if (pts.length < 2) return pts.first;
-  final start = pts.first;
-  // iterate from the tail until we find one > minMeters from start
-  for (final p in pts.reversed) {
-    if (_geo(start, p) > minMeters) return p;
-  }
-  return start;   // fall-back: everything identical
-}
+// latlong2.LatLng _findDistinctEnd(List<latlong2.LatLng> pts,
+//     {double minMeters = 5}) {
+//   if (pts.length < 2) return pts.first;
+//   final start = pts.first;
+//   // iterate from the tail until we find one > minMeters from start
+//   for (final p in pts.reversed) {
+//     if (_geo(start, p) > minMeters) return p;
+//   }
+//   return start;   // fall-back: everything identical
+// }
 
 class RoutePoint {
   final latlong2.LatLng pos;
