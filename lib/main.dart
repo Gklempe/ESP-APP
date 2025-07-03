@@ -12,10 +12,10 @@ import 'package:flutter/scheduler.dart';
 import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart' as fln;
-import 'dart:html' as html;
+//import 'dart:html' as html;
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_web_bluetooth/flutter_web_bluetooth.dart';
-
+import 'notification_service.dart';
 
 
 
@@ -51,17 +51,17 @@ class NotificationService {
     // 1) Web: use HTML5 API
     if (kIsWeb) {
       // request permission if needed
-      if (html.Notification.permission == 'granted') {
-        html.Notification(title, body: body);
-      } else {
-        final perm = await html.Notification.requestPermission();
-        if (perm == 'granted') {
-          html.Notification(title, body: body);
-        } else {
-          debugPrint('🔕 notification permission denied');
-        }
-      }
-      return;
+      // if (html.Notification.permission == 'granted') {
+      //   html.Notification(title, body: body);
+      // } else {
+      //   final perm = await html.Notification.requestPermission();
+      //   if (perm == 'granted') {
+      //     html.Notification(title, body: body);
+      //   } else {
+      //     debugPrint('🔕 notification permission denied');
+      //   }
+      // }
+      // return;
     }
 
     // 2) Mobile/Desktop: use flutter_local_notifications
@@ -318,7 +318,7 @@ class MyAppState extends ChangeNotifier {
     });
   }
 
-  void refreshFakeData() {
+  Future<void> refreshFakeData() async{
     final t = DateTime.now().second + DateTime.now().millisecond / 1000;
 
     battery = 12.5 + (Random().nextDouble() - 0.5) * 0.3;
@@ -349,7 +349,7 @@ class MyAppState extends ChangeNotifier {
 
     // 1) High Temp
     if (engineTemp >= highTempThreshold && !_hasAlertedHighTemp) {
-      NotificationService.show(
+      await NotificationService.show(
         title: 'High Engine Temp',
         body: 'Engine temp is ${engineTemp.toStringAsFixed(1)}°C',
       );
@@ -360,7 +360,7 @@ class MyAppState extends ChangeNotifier {
 
     // 2) Low Battery
     if (battery <= lowBatteryThreshold && !_hasAlertedLowBattery) {
-      NotificationService.show(
+      await NotificationService.show(
         title: 'Low Battery',
         body: 'Battery voltage is ${battery.toStringAsFixed(2)}V',
       );
@@ -371,7 +371,7 @@ class MyAppState extends ChangeNotifier {
 
     // 3) Over Speed
     if (gpsSpeed >= overSpeedThreshold && !_hasAlertedOverSpeed) {
-      NotificationService.show(
+      await NotificationService.show(
         title: 'Overspeed Warning',
         body: 'Speed is ${gpsSpeed.toStringAsFixed(1)} km/h',
       );

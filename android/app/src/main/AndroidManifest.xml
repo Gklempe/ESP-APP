@@ -1,29 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_application_1">
 
     <!-- ─────────────── Permissions ─────────────── -->
-    <!-- Access fine (GPS) location -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!-- (Optional) Coarse (network) location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- Internet for map tiles or network calls -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Bluetooth (Android 12+) -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!-- Android 12+ -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
 
-
+    <!-- Optional queries block for Android 11+ -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
 
     <application
-        android:label="flutter_application_1"
         android:name="${applicationName}"
+        android:label="flutter_application_1"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- Flutter’s default activity -->
+        <!-- Flutter’s default Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -34,11 +38,9 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
 
-            <!-- NormalTheme meta-data stays here -->
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-            />
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -46,23 +48,20 @@
             </intent-filter>
         </activity>
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <!-- Legacy HTTP library (optional) -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
 
-
-        <!-- Flutter embedding meta-data -->
+        <!-- Flutter embedding version -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" 
+            android:value="2" />
+
+        <!-- Google Maps API Key -->
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCQURalMY-XgpdDxLeJefOCIfvV_8lLeM8"/>
+            android:value="AIzaSyCQURalMY-XgpdDxLeJefOCIfvV_8lLeM8" />
 
     </application>
-
-    <!-- (Optional) queries block for Android 11+ text intents -->
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.PROCESS_TEXT"/>
-            <data android:mimeType="text/plain"/>
-        </intent>
-    </queries>
 </manifest>
