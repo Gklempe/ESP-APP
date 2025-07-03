@@ -16,6 +16,9 @@ import 'dart:html' as html;
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_web_bluetooth/flutter_web_bluetooth.dart';
 
+
+
+
 final _notifications = fln.FlutterLocalNotificationsPlugin();
 
 extension LatLngGoogle on latlong2.LatLng {
